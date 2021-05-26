@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends Canvas implements Runnable, MouseMotionListener {
 
@@ -15,7 +16,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     private Camera camera;
     private Spreadsheet ss;
 
-    private BufferedImage level = null;
+    private static BufferedImage level = null;
     private BufferedImage sprite_sheet = null;
     private BufferedImage floor = null;
     private BufferedImage endscreen = null;
@@ -26,6 +27,8 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     public int hp3 = 400;
     public int hp4 = 400;
     public int cells = 4;
+
+    private boolean skip = true;
 
     public boolean gameover = false;
     public boolean mouseIn = false;
@@ -291,19 +294,20 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
                 if(blue == 255 && green == 0)
                     handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, ss));
 
+
                 if(green == 255 && blue == 0)
-                    handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler, this, ss));
+                    handler.addObject(new Enemy(xx * 32, yy * 32, ID.Enemy, handler, this, ss));
 
                 if(red == 150)
                     handler.addObject(new Cell(xx*32, yy*32, ID.Cell, ss));
 
-                if(red == 151)
+                if(red == 153)
                 handler.addObject(new Cell(xx*32, yy*32, ID.Cell1, ss));
 
-                if(red == 152)
+                if(red == 156)
                 handler.addObject(new Cell(xx*32, yy*32, ID.Cell2, ss));
 
-                if(red == 153)
+                if(red == 159)
                 handler.addObject(new Cell(xx*32, yy*32, ID.Cell3, ss));
 
                 if(blue == 255 && green == 255)
@@ -313,9 +317,60 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     }
 
 
+    private void loadWave(BufferedImage image) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+
+        int Ecount = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Enemy)
+                Ecount ++;
+        }
+
+        int Ccount = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Crate)
+                Ccount ++;
+        }
+
+        for (int xx = 0; xx < w; xx++) {
+            for (int yy = 0; yy < h; yy++) {
+                int pixel = image.getRGB(xx, yy);
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+                skip = !skip;
+                if(green == 255 && blue == 0 && Ecount < 30 && !skip) {
+                    handler.addObject(new Enemy(xx * 32, yy * 32, ID.Enemy, handler, this, ss));
+                    Ecount++;
+                }
+
+                if(blue == 255 && green == 255 && Ccount < 9) {
+                    handler.addObject(new Crate(xx*32, yy*32, ID.Crate, ss));
+                    Ccount++;
+                }
+
+            }
+        }
+    }
+
+
+
     public static void main(String[] args) {
 
-        new Game();
+        Game game = new Game();
+
+        while(game.isRunning) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(25000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            game.loadWave(level);
+        }
+
     }
 
     @Override

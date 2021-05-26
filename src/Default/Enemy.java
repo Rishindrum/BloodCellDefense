@@ -11,7 +11,7 @@ public class Enemy extends GameObject{
     Random r = new Random();
     Game game;
     int choose = 0;
-    int hp = 100;
+    int hp = 300;
 
     public Enemy(int x, int y, ID id, Handler handler, Game game, Spreadsheet ss) {
         super(x, y, id, ss);
@@ -41,8 +41,8 @@ public class Enemy extends GameObject{
                 }
                 else if(choose == 0 )
                 {
-                    velX = (r.nextInt(4 - -4) + -4);
-                    velY = (r.nextInt(4 - -4) + -4);
+                    velX = (r.nextInt(6 - -6) + -6);
+                    velY = (r.nextInt(6 - -6) + -6);
                 }
             }
             if (tempObject.getId() == ID.Bullet)
@@ -50,7 +50,7 @@ public class Enemy extends GameObject{
                 if (getBounds().intersects(tempObject.getBounds()))
                 hp-=50;
             }
-            if (tempObject.getId() == ID.Cell && game.State == Game.STATE.GAME)
+            if (tempObject.getId() == ID.Cell&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
                     game.hp1 -= 1;

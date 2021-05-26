@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Crate  extends GameObject{
     BufferedImage crate;
+
     public Crate(int x, int y, ID id, Spreadsheet ss) {
         super(x, y, id, ss);
         crate = ss.grabImage(0, 128+80+200, 32, 32);
