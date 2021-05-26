@@ -7,5 +7,8 @@ public enum ID {
     Crate(),
     Bullet(),
     Enemy(),
-    Cell()
+    Cell(),
+    Cell1(),
+    Cell2(),
+    Cell3()
 }

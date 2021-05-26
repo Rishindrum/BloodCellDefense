@@ -9,14 +9,14 @@ public class Enemy extends GameObject{
     private Handler handler;
     private BufferedImage germ;
     Random r = new Random();
+    Game game;
     int choose = 0;
     int hp = 100;
-    int health = 100;
-    int cells = 4;
 
-    public Enemy(int x, int y, ID id, Handler handler, Spreadsheet ss) {
+    public Enemy(int x, int y, ID id, Handler handler, Game game, Spreadsheet ss) {
         super(x, y, id, ss);
         this.handler = handler;
+        this.game = game;
         germ = ss.grabImage(128+10, 10, 50, 50);
     }
 
@@ -30,7 +30,7 @@ public class Enemy extends GameObject{
         {
             GameObject tempObject = handler.object.get(i);
 
-            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell)
+            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell|| tempObject.getId() == ID.Cell1|| tempObject.getId() == ID.Cell2|| tempObject.getId() == ID.Cell3)
             {
                 if(getBounds().intersects(tempObject.getBounds()))
                 {
@@ -50,12 +50,51 @@ public class Enemy extends GameObject{
                 if (getBounds().intersects(tempObject.getBounds()))
                 hp-=50;
             }
-            if (tempObject.getId() == ID.Cell)
+            if (tempObject.getId() == ID.Cell && game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    health -= 1;
-                    if(health<=0)
+                    game.hp1 -= 1;
+                    if(game.hp1<=0)
+                    {
                         tObject = tempObject;
+                        game.cells--;
+                    }
+
+                }
+            }
+            if (tempObject.getId() == ID.Cell1&& game.State == Game.STATE.GAME)
+            {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    game.hp2 -= 1;
+                    if(game.hp2<=0)
+                    {
+                        tObject = tempObject;
+                        game.cells--;
+                    }
+
+                }
+            }
+            if (tempObject.getId() == ID.Cell2&& game.State == Game.STATE.GAME)
+            {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    game.hp3 -= 1;
+                    if(game.hp3<=0)
+                    {
+                        tObject = tempObject;
+                        game.cells--;
+                    }
+                }
+            }
+            if (tempObject.getId() == ID.Cell3&& game.State == Game.STATE.GAME)
+            {
+                if (getBounds().intersects(tempObject.getBounds())) {
+                    game.hp4 -= 1;
+                    if(game.hp4<=0)
+                    {
+                        tObject = tempObject;
+                        game.cells--;
+                    }
+
 
                 }
             }
@@ -64,10 +103,9 @@ public class Enemy extends GameObject{
 
         if(hp <= 0)
         handler.removeObject(this);
-        if(health<=0 && tObject!=null)
+        if(tObject!=null)
         {
             handler.removeObject(tObject);
-            cells--;
         }
 
     }

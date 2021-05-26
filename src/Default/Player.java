@@ -41,7 +41,7 @@ public class Player extends GameObject {
 
             GameObject tempObject = handler.object.get(i);
 
-            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell) {
+            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell || tempObject.getId() == ID.Cell1 || tempObject.getId() == ID.Cell2 || tempObject.getId() == ID.Cell3) {
 
                 if(getBounds().intersects((Rectangle) tempObject.getBounds())) {
                     x += velX * -1;
@@ -51,7 +51,7 @@ public class Player extends GameObject {
             }
             if(tempObject.getId() == ID.Crate) {
 
-                if(getBounds().intersects((Rectangle) tempObject.getBounds())) {
+                if(getBounds().intersects((Rectangle) tempObject.getBounds())&&game.ammo<=90) {
                     game.ammo += 10;
                     handler.removeObject(tempObject);
                 }
