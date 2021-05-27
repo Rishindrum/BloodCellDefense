@@ -53,7 +53,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp1 -= 2;
+                    game.hp1 -= 1;
                     if(game.hp1<=0)
                     {
                         tObject = tempObject;
@@ -65,7 +65,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell1&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp2 -= 2;
+                    game.hp2 -= 1;
                     if(game.hp2<=0)
                     {
                         tObject = tempObject;
@@ -77,7 +77,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell2&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp3 -= 2;
+                    game.hp3 -= 1;
                     if(game.hp3<=0)
                     {
                         tObject = tempObject;
@@ -88,7 +88,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell3&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp4 -= 2;
+                    game.hp4 -= 1;
                     if(game.hp4<=0)
                     {
                         tObject = tempObject;

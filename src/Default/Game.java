@@ -372,26 +372,27 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
 
         Game game = new Game();
 
-        while(game.State == STATE.GAME) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(25000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            game.loadWave(level);
-            game.wave++;
-            if(game.hp1<=95) {
-                game.hp1 += 5;
-            }
-            if(game.hp2<=95) {
-                game.hp1 += 5;
-            }
-            if(game.hp3<=95) {
-                game.hp1 += 5;
-            }
-            if(game.hp4<=95) {
-                game.hp1 += 5;
-            }
+        while(game.isRunning) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(25000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                game.loadWave(level);
+                game.wave++;
+                if (game.hp1 <= 95) {
+                    game.hp1 += 5;
+                }
+                if (game.hp2 <= 95) {
+                    game.hp1 += 5;
+                }
+                if (game.hp3 <= 95) {
+                    game.hp1 += 5;
+                }
+                if (game.hp4 <= 95) {
+                    game.hp1 += 5;
+
+                }
         }
 
     }
