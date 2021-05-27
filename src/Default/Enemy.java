@@ -30,7 +30,7 @@ public class Enemy extends GameObject{
         {
             GameObject tempObject = handler.object.get(i);
 
-            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell|| tempObject.getId() == ID.Cell1|| tempObject.getId() == ID.Cell2|| tempObject.getId() == ID.Cell3)
+            if(tempObject.getId() == ID.Block || tempObject.getId() == ID.Cell || tempObject.getId() == ID.Cell1 || tempObject.getId() == ID.Cell2 || tempObject.getId() == ID.Cell3 )
             {
                 if(getBounds().intersects(tempObject.getBounds()))
                 {
@@ -53,7 +53,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp1 -= 1;
+                    game.hp1 -= 2;
                     if(game.hp1<=0)
                     {
                         tObject = tempObject;
@@ -65,7 +65,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell1&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp2 -= 1;
+                    game.hp2 -= 2;
                     if(game.hp2<=0)
                     {
                         tObject = tempObject;
@@ -77,7 +77,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell2&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp3 -= 1;
+                    game.hp3 -= 2;
                     if(game.hp3<=0)
                     {
                         tObject = tempObject;
@@ -88,7 +88,7 @@ public class Enemy extends GameObject{
             if (tempObject.getId() == ID.Cell3&& game.State == Game.STATE.GAME)
             {
                 if (getBounds().intersects(tempObject.getBounds())) {
-                    game.hp4 -= 1;
+                    game.hp4 -= 2;
                     if(game.hp4<=0)
                     {
                         tObject = tempObject;

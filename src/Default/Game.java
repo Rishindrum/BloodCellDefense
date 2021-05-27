@@ -27,6 +27,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     public int hp3 = 400;
     public int hp4 = 400;
     public int cells = 4;
+    public int wave = 1;
 
     private boolean skip = true;
 
@@ -174,14 +175,14 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             g.setColor(Color.gray);
             g.fillRect(5, 47, 200, 16);
             g.setColor(Color.green);
-            g.fillRect(5, 47, (int) (hp3 * 2), 16);
+            g.fillRect(5, 47, (int) (hp4 * 2), 16);
             g.setColor(Color.black);
             g.drawRect(5, 47, 200, 16);
             g.drawString("Bottom Right Red Cell Health", 10, 47 + 12);
             g.setColor(Color.gray);
             g.fillRect(5, 68, 200, 16);
             g.setColor(Color.green);
-            g.fillRect(5, 68, (int) (hp4*2), 16);
+            g.fillRect(5, 68, (int) (hp3*2), 16);
             g.setColor(Color.black);
             g.drawRect(5, 68, 200, 16);
             g.drawString("Bottom Left Red Cell Health", 10, 68 + 12);
@@ -227,6 +228,10 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             g.setColor(Color.black);
             g.fillRect(0, 0, 1230, 1000);
             g.drawImage(endscreen, 150, 100, null);
+            Font fnt = new Font("Arial", Font.BOLD, 75);
+            g.setFont(fnt);
+            g.setColor(Color.CYAN);
+            g.drawString("Highest Wave: " + wave, 200, 100);
             if (mouseIn) {
                 g.setColor(Color.white);
                 g.drawRect(370, 287, 200, 25);
@@ -362,13 +367,26 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
 
         Game game = new Game();
 
-        while(game.isRunning) {
+        while(game.State == STATE.GAME) {
             try {
                 TimeUnit.MILLISECONDS.sleep(25000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             game.loadWave(level);
+            game.wave++;
+            if(game.hp1<=95) {
+                game.hp1 += 5;
+            }
+            if(game.hp2<=95) {
+                game.hp1 += 5;
+            }
+            if(game.hp3<=95) {
+                game.hp1 += 5;
+            }
+            if(game.hp4<=95) {
+                game.hp1 += 5;
+            }
         }
 
     }
