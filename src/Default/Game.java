@@ -373,6 +373,9 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
         Game game = new Game();
 
         while(game.isRunning) {
+            if(game.State == STATE.OVER)
+                break;
+
                 try {
                     TimeUnit.MILLISECONDS.sleep(25000);
                 } catch (InterruptedException e) {
@@ -380,19 +383,6 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
                 }
                 game.loadWave(level);
                 game.wave++;
-                if (game.hp1 <= 95) {
-                    game.hp1 += 5;
-                }
-                if (game.hp2 <= 95) {
-                    game.hp1 += 5;
-                }
-                if (game.hp3 <= 95) {
-                    game.hp1 += 5;
-                }
-                if (game.hp4 <= 95) {
-                    game.hp1 += 5;
-
-                }
         }
 
     }
