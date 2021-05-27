@@ -212,6 +212,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             hp4=100;
             gameover=false;
             cells=4;
+            wave=1;
             menu.render(g);
             if (playhover) {
                 g.setColor(Color.white);
@@ -366,6 +367,66 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
         }
     }
 
+    private void loadPlay(BufferedImage image) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+
+        int Ccount1 = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Cell)
+                Ccount1 ++;
+        }
+
+        int Ccount2 = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Cell1)
+                Ccount2 ++;
+        }
+
+        int Ccount3 = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Cell2)
+                Ccount3 ++;
+        }
+
+        int Ccount4 = 0;
+        for (int i = 0; i < handler.object.size(); i++) {
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Cell3)
+                Ccount4 ++;
+        }
+
+        for (int xx = 0; xx < w; xx++) {
+            for (int yy = 0; yy < h; yy++) {
+                int pixel = image.getRGB(xx, yy);
+                int red = (pixel >> 16) & 0xff;
+
+                skip = !skip;
+
+                if(red == 150  && Ccount1 < 1 && !skip) {
+                    handler.addObject(new Cell(xx * 32, yy * 32, ID.Cell, ss));
+                    Ccount1++;
+                }
+
+                if(red == 153  && Ccount2 < 1 && !skip) {
+                    handler.addObject(new Cell1(xx * 32, yy * 32, ID.Cell1, ss));
+                    Ccount2++;
+                }
+                if(red == 156  && Ccount3 < 1 && !skip) {
+                    handler.addObject(new Cell2(xx * 32, yy * 32, ID.Cell2, ss));
+                    Ccount3++;
+                }
+                if(red == 159  && Ccount4 < 1 && !skip) {
+                    handler.addObject(new Cell3(xx * 32, yy * 32, ID.Cell3, ss));
+                    Ccount4++;
+                }
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
@@ -373,17 +434,22 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
         Game game = new Game();
 
         while(game.isRunning) {
-            if(game.State == STATE.OVER)
+            if(game.State == STATE.OVER )
+            {
                 break;
+            }
 
                 try {
                     TimeUnit.MILLISECONDS.sleep(25000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if (game.wave == 1)
+                    game.loadPlay(level);
                 game.loadWave(level);
                 game.wave++;
         }
+
 
     }
 
