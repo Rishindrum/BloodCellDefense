@@ -193,6 +193,11 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             g.setColor(Color.black);
             g.drawRect(5, 89, 200, 16);
             g.drawString("Ammo: " + ammo, 10, 89 + 12);
+            g.setColor(Color.cyan);
+            g.fillRect(5, 110, 200, 16);
+            g.setColor(Color.black);
+            g.drawRect(5, 110, 200, 16);
+            g.drawString("Wave: " + wave, 10, 110 + 12);
             gameover = cells <= 2;
 
             if (gameover)
@@ -271,7 +276,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             g.drawString("direction you want to shoot. You will see the ammo and health of each of your red blood cells on the top ", 10, 330);
             g.drawString("left. Once two red blood cells have been destroyed, you have lost. In order to gain ammo, collect the ", 10, 370);
             g.drawString("red and white pills. They each give 10 ammo. But, you cannot collect these pills if you have more than", 10, 410);
-            g.drawString("90 ammo already. Good luck, and please save the blood cells!", 200, 450);
+            g.drawString("90 ammo already. Survive as many waves as you can. Good luck, and please save the blood cells!", 200, 450);
         }
         //////////////////////////////////
         g.dispose();
