@@ -103,10 +103,7 @@ public class Enemy extends GameObject{
 
         if(hp <= 0)
         handler.removeObject(this);
-        if(tObject!=null)
-        {
-            handler.removeObject(tObject);
-        }
+
 
     }
 

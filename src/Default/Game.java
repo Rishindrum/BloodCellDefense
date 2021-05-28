@@ -277,7 +277,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             g.drawString("direction you want to shoot. You will see the ammo and health of each of your red blood cells on the top ", 10, 330);
             g.drawString("left. Once two red blood cells have been destroyed, you have lost. In order to gain ammo, collect the ", 10, 370);
             g.drawString("red and white pills. They each give 10 ammo. But, you cannot collect these pills if you have more than", 10, 410);
-            g.drawString("90 ammo already. Survive as many waves as you can. Good luck, and please save the blood cells!", 200, 450);
+            g.drawString("90 ammo already. Survive as many waves as you can. Good luck, and please save the blood cells!", 10, 450);
         }
         //////////////////////////////////
         g.dispose();
@@ -433,22 +433,20 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
 
         Game game = new Game();
 
-        while(game.isRunning) {
-            if(game.State == STATE.OVER )
-            {
-                break;
-            }
 
-                try {
-                    TimeUnit.MILLISECONDS.sleep(25000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (game.wave == 1)
-                    game.loadPlay(level);
-                game.loadWave(level);
-                game.wave++;
+       while(game.isRunning){
+           if(game.wave==1)
+               game.loadPlay(level);
+            try {
+                TimeUnit.MILLISECONDS.sleep(25000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            game.loadWave(level);
+            game.wave++;
+
         }
+
 
 
     }
