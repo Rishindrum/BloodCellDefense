@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     public int hp4 = 400;
     public int cells = 4;
     public int wave = 1;
+    public int HighScore = 1;
 
     private boolean skip = true;
 
@@ -237,7 +238,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             Font fnt = new Font("Arial", Font.BOLD, 75);
             g.setFont(fnt);
             g.setColor(Color.CYAN);
-            g.drawString("Highest Wave: " + wave, 200, 100);
+            g.drawString("Highest Wave: " + HighScore, 200, 100);
             if (mouseIn) {
                 g.setColor(Color.white);
                 g.drawRect(370, 287, 200, 25);
@@ -432,7 +433,7 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
     public static void main(String[] args) {
 
         Game game = new Game();
-
+        game.HighScore = 1;
 
        while(game.isRunning){
            if(game.wave==1)
@@ -444,9 +445,10 @@ public class Game extends Canvas implements Runnable, MouseMotionListener {
             }
             game.loadWave(level);
             game.wave++;
-
+            if(game.State == STATE.GAME) {
+                game.HighScore = game.wave;
+            }
         }
-
 
 
     }
